@@ -1,7 +1,13 @@
-export default function page() {
+import LandingSection from "./landingSection";
+import MainEventImage from "./mainEventImage";
+import { MainSection } from "./mainSection";
+
+export default function Page() {
   return (
-    <div>
-      <p>Hello!</p>
-    </div>
+    <>
+      <LandingSection />
+
+      <MainSection />
+    </>
   );
 }
