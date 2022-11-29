@@ -6,8 +6,9 @@ export default function Page() {
   return (
     <>
       <LandingSection />
-
-      <MainSection />
+      <div className=" px-7 mx-auto max-w-6xl sm:w-screen md:w-screen lg:w-screen  ">
+        <MainSection />
+      </div>
     </>
   );
 }

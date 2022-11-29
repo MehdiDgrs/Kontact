@@ -33,25 +33,15 @@ export async function MainSection() {
   //  let arrayOfArticles = data.data.articles.data;
 
   return (
-    <section className=" border-t-4 w-screen  ">
-      {/* {arrayOfArticles.map((article) => {
-        return (
-          <PostPreview
-            key="1"
-            title={article.attributes?.title}
-            category={article.attributes.categories.data[0]?.attributes.name}
-            postPicture={
-              DOMAIN + article.attributes.mainImage.data?.attributes?.url
-            }
-            description={article.attributes.content}
-          />
-        );
-      })} */}
-      <div className="grid grid-cols-1 mx-auto place-content-center w-4/5">
+    <section className="my-5">
+      <h1 className="my-5 text-black font-bold text-3xl uppercase leading-5  ">
+        Articles
+      </h1>
+      <div className="">
         {articles.map((article) => {
           let { attributes } = article;
           let imgUrl = attributes.mainImage.data?.attributes.formats.small.url;
-          console.log(DOMAIN + imgUrl);
+          console.log(imgUrl);
 
           return (
             <PostPreview
