@@ -28,7 +28,7 @@ export default async function MainEventImage() {
   let LastMainEvent = mainArr[0].attributes.articles.data.pop();
   let url = LastMainEvent.attributes.mainImage.data.attributes.url;
   let imgSrc = mainURL + url;
-  console.log(imgSrc);
+  imgSrc;
 
   return <image src={imgSrc} fill></image>;
 }

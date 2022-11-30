@@ -4,9 +4,7 @@ import MainEventImage from "./mainEventImage";
 export default function LandingSection() {
   return (
     <section>
-      <div className="w-screen bg-cover ">
-        <MainEventImage />
-      </div>
+      <div className="w-screen bg-cover ">{/* <MainEventImage /> */}</div>
     </section>
   );
 }

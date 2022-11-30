@@ -1,32 +1,27 @@
 let DOMAIN = process.env.DOMAIN;
 let URL = process.env.QUERY_ADRESS;
-let query = `query FetchAllPosts {
-  articles{
-    data 
-    {
-      attributes
-        {mainImage{data{attributes{url}}}
-          title
-          content 
-          categories{data{attributes{name}}}
-          
-      createdAt }
-    }
-  } 
-}`;
-let getPosts = async () => {
-  let res = await fetch(URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query }),
-  });
-  if (!res.ok) {
-    console.error("error in request");
-  } else return res.json();
-};
+import { fetchAllPosts } from "../mainSection";
+import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  const posts = await fetchAllPosts().then((result) => result.data);
+
+  return posts.map((post) => ({
+    slug: post.attributes?.slug,
+  }));
+}
 
 export default async function Page({ params }) {
   const { slug } = params;
-  console.log(params);
-  return <p>{slug}</p>;
+  let data = await fetchAllPosts(slug);
+  if (data.data.length === 0) {
+    notFound();
+  }
+  let attributes = data?.data[0]?.attributes;
+  attributes;
+  return (
+    <>
+      <p>{attributes.content}</p>
+    </>
+  );
 }

@@ -1,33 +1,23 @@
 import PostPreview from "./postPreview";
 let DOMAIN = process.env.DOMAIN;
 let URL = process.env.QUERY_ADRESS;
-// let query = `query FetchAllPosts {
-//   articles{
-//     data
-//     {
-//       attributes
-//         {mainImage{data{attributes{url}}}
-//           title
-//           content
-//           categories{data{attributes{name}}}
 
-//       createdAt }
-//     }
-//   }
-// }`;
-let fetchData = async () => {
-  let res = await fetch("http://localhost:1337/api/articles?populate=%2A", {
-    method: "GET",
-    // headers: { "Content-Type": "application/json" },
-    //body: JSON.stringify({ query }),
-  });
+export let fetchAllPosts = async (slug) => {
+  let res = await fetch(
+    `http://localhost:1337/api/articles${
+      slug ? `?filters\[Slug\][$eq]=${slug}` : `?populate=%2A`
+    }`,
+    {
+      method: "GET",
+    }
+  );
   if (!res.ok) {
     console.error("error in request");
   } else return res.json();
 };
 
 export async function MainSection() {
-  let res = await fetchData();
+  let res = await fetchAllPosts();
 
   let articles = res.data;
   //  let arrayOfArticles = data.data.articles.data;
@@ -41,15 +31,16 @@ export async function MainSection() {
         {articles.map((article) => {
           let { attributes } = article;
           let imgUrl = attributes.mainImage.data?.attributes.formats.small.url;
-          console.log(imgUrl);
 
           return (
             <PostPreview
+              id={article.id}
               key={article.id}
               title={attributes.title}
               category={attributes.categories}
               description={attributes.content}
               postPicture={DOMAIN + imgUrl}
+              slug={attributes.slug}
             />
           );
         })}
