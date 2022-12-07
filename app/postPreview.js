@@ -11,7 +11,7 @@ export default function postPreview({
   //  function to remove white space in URL
   slug;
   return (
-    <Link href={"/" + slug}>
+    <Link href={`/${slug}`}>
       <div className="  grid grid-cols-3 lg:w-3/4 w-full   py-5 border-b border-grey   bg-white  ">
         <img src={postPicture} />
 

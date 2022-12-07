@@ -9,8 +9,8 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body className={`${myFont.className} m-0 p_0 box-border text-[#585b63]`}>
-        <div className="uppercase text-xl border-b-2 border-gray-200">
-          <nav className="w-full bg-white px-10 flex py-10  justify-between  ">
+        <div className="uppercase text-xl ">
+          <nav className="w-full bg-white px-10 flex py-10  justify-between border-b-2 border-gray-200 ">
             <h1 className=" text-red-600 uppercase bold text-xl justify-start   ">
               Kontact
             </h1>
@@ -22,9 +22,8 @@ export default function RootLayout({ children }) {
             </div>
             <NavLink href="/">Contact</NavLink>
           </nav>
+          {children}
         </div>
-
-        <div>{children}</div>
       </body>
     </html>
   );

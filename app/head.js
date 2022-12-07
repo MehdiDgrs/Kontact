@@ -1,10 +1,7 @@
-import { fetchAllPosts } from "./mainSection";
-
-export default async function Head({ params }) {
-  let data = await fetchAllPosts(params.slug);
+export default function Head({ params }) {
   return (
     <>
-      <title>LA SUEUR LOL</title>
+      <title>ACCUEIL</title>
     </>
   );
 }

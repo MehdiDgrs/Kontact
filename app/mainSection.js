@@ -5,7 +5,7 @@ let URL = process.env.QUERY_ADRESS;
 export let fetchAllPosts = async (slug) => {
   let res = await fetch(
     `http://localhost:1337/api/articles${
-      slug ? `?filters\[Slug\][$eq]=${slug}` : `?populate=%2A`
+      slug ? `?filters\[Slug\][$eq]=${slug}&populate=%2A` : `?populate=%2A`
     }`,
     {
       method: "GET",

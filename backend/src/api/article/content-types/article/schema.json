@@ -49,6 +49,19 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "postImg": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "postImgDescription": {
+      "type": "text"
     }
   }
 }

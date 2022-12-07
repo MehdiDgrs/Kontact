@@ -1,8 +1,9 @@
 let DOMAIN = process.env.DOMAIN;
-let URL = process.env.QUERY_ADRESS;
 import { fetchAllPosts } from "../mainSection";
 import { notFound } from "next/navigation";
-
+import BlogBody from "./blogBody";
+import { useTitle } from "./useTitle";
+import Aside from "./aside";
 export async function generateStaticParams() {
   const posts = await fetchAllPosts().then((result) => result.data);
 
@@ -18,10 +19,22 @@ export default async function Page({ params }) {
     notFound();
   }
   let attributes = data?.data[0]?.attributes;
-  attributes;
+  let postImg = attributes.postImg?.data?.attributes;
+
   return (
-    <>
-      <p>{attributes.content}</p>
-    </>
+    <div>
+      <BlogBody
+        title={attributes.title}
+        author={attributes.author}
+        date={attributes.createdAt}
+        description={attributes.content}
+        postImg={`${postImg ? DOMAIN + postImg.formats.medium.url : null}`}
+        imgCaption={
+          typeof attributes.postImgDescription === "string" &&
+          attributes?.postImgDescription
+        }
+      />
+      <Aside />
+    </div>
   );
 }
