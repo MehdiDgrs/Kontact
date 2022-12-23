@@ -1,23 +1,10 @@
 import PostPreview from "./postPreview";
+import { usePosts } from "./hooks/usePosts";
 let DOMAIN = process.env.DOMAIN;
 let URL = process.env.QUERY_ADRESS;
 
-export let fetchAllPosts = async (slug) => {
-  let res = await fetch(
-    `http://localhost:1337/api/articles${
-      slug ? `?filters\[Slug\][$eq]=${slug}&populate=%2A` : `?populate=%2A`
-    }`,
-    {
-      method: "GET",
-    }
-  );
-  if (!res.ok) {
-    console.error("error in request");
-  } else return res.json();
-};
-
 export async function MainSection() {
-  let res = await fetchAllPosts();
+  let res = await usePosts();
 
   let articles = res.data;
   //  let arrayOfArticles = data.data.articles.data;

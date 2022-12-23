@@ -1,28 +1,43 @@
-import { fetchAllPosts } from "../mainSection";
-
+import { usePosts } from "../hooks/usePosts";
+import AsideElement from "./asideElements";
+// import { useWindowSize } from "../hooks/useWindowSize";
+let domain = process.env.DOMAIN;
+let arr = [];
 let getAsidePosts = async () => {
-  const posts = await fetchAllPosts().then((result) => result.data);
-  console.log(posts);
-  let arr = [];
+  const posts = await usePosts().then((result) => result.data);
+  console.log(
+    posts[0].attributes.postImg.data.attributes.formats.thumbnail.url
+  );
+
   let counter = 0;
   for (let i = posts.length - 1; i >= 0; i--) {
-    arr.push(<div key={posts[i].id}>{posts[i].attributes.title}</div>);
+    arr.push(
+      <AsideElement
+        key={posts[i].id}
+        title={posts[i].attributes.title}
+        postsImg={`${
+          domain +
+          posts[i].attributes.postImg.data?.attributes.formats.thumbnail.url
+        }`}
+      />
+    );
   }
 
   return arr;
 };
+getAsidePosts();
 export default async function Aside() {
-  const posts = await fetchAllPosts().then((result) => result.data);
-  console.log(posts.length);
+  // const posts = await usePosts().then((result) => result.data);
+  // console.log(posts.length);
 
-  let newData = posts.map((x) => {
-    return <div key={x.id}>{x.attributes.title}</div>;
-  });
+  // let newData = posts.map((x) => {
+  //   return <div key={x.id}>{x.attributes.title}</div>;
+  // });
 
   return (
-    <div>
-      {newData}{" "}
-      <div style={{ backgroundColor: "red" }}>{await getAsidePosts()}</div>
-    </div>
+    <aside className=" xl:col-span-2 xl:max-w-[75%] hidden xl:block ml-5 xl:content-center  my-auto ">
+      <h1 className="text-gray-900 text-xl mb-5 font-bold">Plus d'articles</h1>
+      {arr}
+    </aside>
   );
 }

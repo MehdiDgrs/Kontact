@@ -1,3 +1,5 @@
+import Aside from "./aside";
+
 export default function blogBody({
   title,
   author,
@@ -10,7 +12,7 @@ export default function blogBody({
   let placeHolderDate = Date();
   console.log(new Date(date).toLocaleDateString());
   return (
-    <article className="mx-auto px-5 lg:max-w-[50%] lg:w-2/4  my-5   md:max-w-[75%]  break-words  py-10  ">
+    <article className=" xl:col-span-4 my-5  xl:max-w-[100%] lg:min-w-[75%] md:max-w-[75%] mx-auto  break-words  py-10  ">
       <div className="py-3">
         <h1 className="text-gray-900 text-2xl mb-5 md:text-3xl lg:text-3xl  line font-bold uppercase mt-2  leading-5 ">
           {title}

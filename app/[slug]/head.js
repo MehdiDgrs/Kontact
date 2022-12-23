@@ -1,6 +1,6 @@
-import { fetchAllPosts } from "../mainSection";
+import { usePosts } from "../hooks/usePosts";
 export default async function Head({ params }) {
-  const post = await fetchAllPosts(params.slug);
+  const post = await usePosts(params.slug);
   let { data } = post;
   let title = data[0]?.attributes?.title;
   return (
